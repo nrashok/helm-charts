@@ -14,5 +14,21 @@ helm repo update
 
 helm install test-release test-repo/example
     </pre>
+
+
+    <pre>
+        1. Update the Chart.yaml file:
+           - Open the Chart.yaml file located at helm-charts/charts/example/Chart.yaml
+           - Update the version field to the new version, e.g., 2.0.0
+        
+        2. Commit the changes:
+           git add helm-charts/charts/example/Chart.yaml
+           git commit -m "Release version 2.0.0"
+           git push origin main
+
+         3. Create a new tag for the new version
+         git tag v2.0.0
+         git push origin v2.0.0  
+        </pre>          
 </body>
 </html>
