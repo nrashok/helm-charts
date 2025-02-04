@@ -29,5 +29,15 @@ jobs:
         with:
           skip_existing: true
           packages_with_index: true
+          charts_repo_url: http://charts.martake.com
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Push to GitHub Pages
+        run: |
+          git clone --branch main https://github.com/${{ github.repository }} main
+          cp -r .cr-release-packages/* main/
+          cd main
+          git add .
+          git commit -m "Update Helm charts"
+          git push origin main
