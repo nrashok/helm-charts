@@ -24,6 +24,9 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v3
 
+      - name: Package Helm Chart
+        run: helm package ./charts/example -d .
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         with:
@@ -31,3 +34,9 @@ jobs:
           packages_with_index: true
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Push Helm Chart to Repo Root
+        run: |
+          git add *.tgz
+          git commit -m "Add Helm chart package"
+          git push origin main
